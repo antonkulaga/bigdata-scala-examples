@@ -1,5 +1,6 @@
 package simple
 
+import com.bigdata.rdf.sail.remote.BigdataSailRemoteRepository
 import com.bigdata.rdf.sail.{BigdataSailTupleQuery, BigdataSailRepositoryConnection, BigdataSailRepository, BigdataSail}
 import java.io.File
 import java.util.Properties
@@ -75,7 +76,6 @@ class BigData(url:String="./db/test/",dbFileName:String="bigdata.jnl")
     new BigdataSail(properties)
   }
 
-
   /*
   Bigdata Sesame repository
    */
@@ -84,6 +84,7 @@ class BigData(url:String="./db/test/",dbFileName:String="bigdata.jnl")
     repo.initialize()
     repo
   }
+
 
   def readConnection: BigdataSailRepositoryConnection = repo.getReadOnlyConnection //for convenience, provides read connection
 
@@ -140,7 +141,7 @@ class BigData(url:String="./db/test/",dbFileName:String="bigdata.jnl")
   def write[T](action:BigdataSailRepositoryConnection=>T):Try[T] =
   {
     val con = this.writeConnection
-    con.setAutoCommit(false)
+    con.begin()
     val res = Try {
       val r = action(con)
       con.commit()

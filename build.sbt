@@ -1,6 +1,6 @@
 name := "bigdata-scala-examples"
 
-version := "0.1"
+version := "0.2"
 
 
 // For apache libs
@@ -13,7 +13,7 @@ resolvers += "Bigdata releases" at "http://systap.com/maven/releases/"
 resolvers += "nxparser-repo" at "http://nxparser.googlecode.com/svn/repository/"
 
 libraryDependencies ++= Seq(
-    "com.bigdata" % "bigdata" % "1.3.0",
-    "org.scalatest" % "scalatest_2.10" % "2.1.0"
+    "com.bigdata" % "bigdata" % "1.4.0",
+    "org.scalatest" %% "scalatest" % "2.2.1"
 )
  
